@@ -6,9 +6,9 @@ namespace ADS\Exception;
 
 use ADS\JsonImmutableObjects\JsonSchemaAwareRecordLogic;
 use ADS\Util\StringUtil;
-use ReflectionClass;
 
 use function sprintf;
+use function strrchr;
 
 trait DefaultJsonSchemaException
 {
@@ -19,11 +19,22 @@ trait DefaultJsonSchemaException
 
     private function init(): void
     {
-        $this->type = sprintf(
-            '/problem/%s',
-            StringUtil::decamelize((new ReflectionClass($this))->getShortName(), '-'),
-        );
         $this->detail = $this->detail();
+    }
+
+    /**
+     * @return array<string, string>
+     *
+     * @phpcsSuppress SlevomatCodingStandard.Classes.UnusedPrivateElements.UnusedMethod
+     */
+    private static function __defaultProperties(): array
+    {
+        return [
+            'type' => sprintf(
+                '/problem/%s',
+                StringUtil::decamelize(strrchr(static::class, '\\'), '-'),
+            ),
+        ];
     }
 
     abstract protected function detail(): string;
