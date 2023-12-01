@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace ADS\Exception;
 
+use ADS\JsonImmutableObjects\JsonSchemaAwareRecordLogic;
 use ADS\Util\StringUtil;
-use EventEngine\JsonSchema\JsonSchemaAwareRecordLogic;
 use ReflectionClass;
 
 use function sprintf;

@@ -13,8 +13,9 @@
     ],
     "require": {
         "php": "^8.2",
-        "event-engine/php-json-schema": "~3.0",
-        "arnedesmedt/php-util": "~0.1"
+        "arnedesmedt/json-immutable-objects": "~0.1",
+        "arnedesmedt/php-util": "~0.1",
+        "event-engine/php-json-schema": "~3.0"
     },
     "require-dev" : {
         "doctrine/coding-standard": "~11.0",
