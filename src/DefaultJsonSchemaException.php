@@ -7,9 +7,12 @@ namespace ADS\Exception;
 use ADS\JsonImmutableObjects\JsonSchemaAwareRecordLogic;
 use ADS\Util\StringUtil;
 use ReflectionClass;
+use ReflectionProperty;
 
+use function array_combine;
 use function array_diff_key;
 use function array_flip;
+use function array_map;
 use function sprintf;
 use function strrchr;
 
@@ -56,14 +59,20 @@ trait DefaultJsonSchemaException
     {
         $refObj = new ReflectionClass(static::class);
         $properties = $refObj->getProperties();
+        $propertiesByName = array_combine(
+            array_map(
+                static fn (ReflectionProperty $property): string => $property->getName(),
+                $properties,
+            ),
+            $properties,
+        );
+        $propertiesByName = array_diff_key($propertiesByName, array_flip(self::PROPERTIES_TO_IGNORE));
         $propertyTypeMap = [];
 
-        $properties = array_diff_key($properties, array_flip(self::PROPERTIES_TO_IGNORE));
+        foreach ($propertiesByName as $propertyName => $property) {
+            $type = self::typeFromProperty($property, $refObj);
 
-        foreach ($properties as $prop) {
-            $type = self::typeFromProperty($prop, $refObj);
-
-            $propertyTypeMap[$prop->getName()] = [
+            $propertyTypeMap[$propertyName] = [
                 $type->getName(),
                 self::isScalarType($type->getName()),
                 $type->allowsNull(),
