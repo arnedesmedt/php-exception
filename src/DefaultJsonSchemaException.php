@@ -15,7 +15,9 @@ use function array_flip;
 use function array_map;
 use function sprintf;
 use function strrchr;
+use function substr;
 
+/** @property string $message */
 trait DefaultJsonSchemaException
 {
     use JsonSchemaAwareRecordLogic;
@@ -37,6 +39,7 @@ trait DefaultJsonSchemaException
     private function init(): void
     {
         $this->detail = $this->detail();
+        $this->message = $this->detail;
     }
 
     /**
@@ -46,10 +49,16 @@ trait DefaultJsonSchemaException
      */
     private static function __defaultProperties(): array
     {
+        $reflectionClass = new ReflectionClass(static::class);
+
+        $toDecamilize = $reflectionClass->hasProperty('title')
+            ? $reflectionClass->getProperty('title')->getDefaultValue()
+            : substr(strrchr(static::class, '\\'), 1);
+
         return [
             'type' => sprintf(
                 '/problem/%s',
-                StringUtil::decamelize(strrchr(static::class, '\\'), '-'),
+                StringUtil::decamelize($toDecamilize, '-', ' '),
             ),
         ];
     }
