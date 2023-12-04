@@ -23,6 +23,8 @@ trait DefaultJsonSchemaException
     use JsonSchemaAwareRecordLogic;
 
     private const PROPERTIES_TO_IGNORE = [
+        'statusCode',
+        'headers',
         'message',
         'code',
         'file',
