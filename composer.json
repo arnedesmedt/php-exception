@@ -20,6 +20,7 @@
     },
     "require-dev" : {
         "doctrine/coding-standard": "~11.0",
+        "icanhazstring/composer-unused": "^0.8.11",
         "phpmd/phpmd": "~2.0",
         "phpro/grumphp": "~2.0",
         "phpstan/phpstan": "~1.0",
@@ -51,6 +52,7 @@
     },
     "scripts": {
         "tests": [
+            "vendor/bin/composer-unused",
             "vendor/bin/phpcbf",
             "vendor/bin/phpcs",
             "vendor/bin/phpstan analyze --no-progress",
