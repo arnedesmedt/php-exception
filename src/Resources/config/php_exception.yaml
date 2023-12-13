@@ -1,0 +1,4 @@
+services:
+    ADS\Exception\MetadataExtractor\ThrowsExtractor:
+        arguments:
+            - '@ADS\Util\MetadataExtractor\MetadataExtractor'

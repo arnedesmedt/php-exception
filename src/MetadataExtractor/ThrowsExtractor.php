@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ADS\Exception\MetadataExtractor;
 
 use ADS\Exception\Attribute\Throws;
-use ADS\Util\MetadataExtractor\MetadataExtractorAware;
+use ADS\Util\MetadataExtractor\MetadataExtractor;
 use ReflectionClass;
 use ReflectionNamedType;
 
@@ -13,7 +13,10 @@ use function array_merge;
 
 class ThrowsExtractor
 {
-    use MetadataExtractorAware;
+    public function __construct(
+        private readonly MetadataExtractor $metadataExtractor,
+    ) {
+    }
 
     /**
      * @param ReflectionClass<object> $reflectionClass
