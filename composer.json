@@ -13,8 +13,8 @@
     ],
     "require": {
         "php": "^8.2",
-        "arnedesmedt/json-immutable-objects": "dev-main",
-        "arnedesmedt/php-util": "dev-main",
+        "arnedesmedt/json-immutable-objects": "~0.1",
+        "arnedesmedt/php-util": "~0.1",
         "event-engine/php-json-schema": "~3.0",
         "symfony/http-kernel": "~6.0"
     },
