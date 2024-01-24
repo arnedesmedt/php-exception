@@ -12,11 +12,11 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.1 || ^8.2",
         "arnedesmedt/json-immutable-objects": "~0.1",
         "arnedesmedt/php-util": "~0.1",
         "event-engine/php-json-schema": "~3.0",
-        "symfony/http-kernel": "~6.0"
+        "symfony/http-kernel": "~6.0 || ~7.0"
     },
     "require-dev" : {
         "doctrine/coding-standard": "~11.0",
