@@ -30,6 +30,7 @@ trait DefaultJsonSchemaException
         'file',
         'line',
         '__useMaxValues',
+        '__encryptedSensitiveData',
         '__propTypeMap',
         '__schema',
         '__arrayPropItemTypeMap',
